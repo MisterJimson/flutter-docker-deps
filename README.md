@@ -11,13 +11,35 @@ See the example folder of this repo. This example Flutter project folder was cre
 PROJECT_PATH=$PWD
 
 docker run -ti \
-    -v ${PROJECT_PATH}:/example \
+    -v ${PROJECT_PATH}:/project \
     -v $FLUTTER_INSTALL_CACHE_PATH:/flutter-installs \
     jasonrai/flutter-docker-deps:latest \
-    /bin/sh -c "./example/docker-flutter-install-then-test.sh"
+    /bin/sh -c "./project/docker-flutter-install-then-test.sh"
 ```
 This script runs the docker image, mounting 2 directories from the host OS onto the container.
 
-`PROJECT_PATH` would be the path to your flutter project, mounted as `/example` in this example. If you keep this script in the root of your Flutter project, you can keep `PROJECT_PATH=$PWD` to set the path for you.
+`PROJECT_PATH` is the path to your flutter project. If you keep this script in the root of your Flutter project, you can keep `PROJECT_PATH=$PWD` to set the path for you.
 
 `$FLUTTER_INSTALL_CACHE_PATH` is a bash environment variable. You need to set it to where you want to cache Flutter installs on the host machine.
+### docker-flutter-install-then-test.sh
+```
+VERSION="1.3.8"
+CHANNEL="beta"
+
+cd /flutter-installs
+
+if [ ! -d "v${VERSION}-${CHANNEL}" ]; then
+    wget https://storage.googleapis.com/flutter_infra/releases/${CHANNEL}/linux/flutter_linux_v${VERSION}-${CHANNEL}.tar.xz
+    mkdir v${VERSION}-${CHANNEL}
+    tar xf flutter_linux_v${VERSION}-${CHANNEL}.tar.xz -C v${VERSION}-${CHANNEL}
+fi
+
+cd ..
+export PATH=/flutter-installs/v${VERSION}-${CHANNEL}/flutter/bin:$PATH
+cd project/
+flutter packages get
+flutter test
+```
+This script installs Flutter if needed then runs `flutter test`. Beware that this script is ran inside the container, it's not the bash environment of the host machine like the previous script is.
+
+In this script set the version and release channel of Flutter you want to run tests against. It will only download missing versions of Flutter. So the first time you run tests for each Flutter version expect them to take longer.
