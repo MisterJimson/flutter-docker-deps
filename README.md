@@ -6,6 +6,8 @@ This project is inspired by [appleboy/flutter-docker](https://github.com/applebo
 This also allows the same Docker image to work for mutiple Flutter projects, all using different versions of Flutter.
 ## How to use
 See the example folder of this repo. This example Flutter project folder was created using `flutter create` with 2 scripts added.
+
+Add scripts similar to the ones in the example, then just run `./docker-run-tests.sh`.
 ### docker-run-tests.sh
 ```
 PROJECT_PATH=$PWD
