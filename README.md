@@ -44,4 +44,4 @@ flutter test
 ```
 This script installs Flutter if needed then runs `flutter test`. Beware that this script is ran inside the container, it's not the bash environment of the host machine like the previous script is.
 
-In this script set the version and release channel of Flutter you want to run tests against. It will only download missing versions of Flutter. So the first time you run tests for each Flutter version expect them to take longer.
+In this script set the version and release channel of Flutter that you want to test on. It will only download missing versions of Flutter. So the first time you run tests for each Flutter version expect them to take longer.
