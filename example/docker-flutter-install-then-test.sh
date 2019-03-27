@@ -13,6 +13,6 @@ fi
 
 cd ..
 export PATH=/flutter-installs/v${VERSION}-${CHANNEL}/flutter/bin:$PATH
-cd example/
+cd project/
 flutter packages get
 flutter test

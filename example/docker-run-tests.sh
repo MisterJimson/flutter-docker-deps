@@ -1,7 +1,9 @@
-REPO_PATH=$PWD
+#!/usr/bin/env bash
+
+PROJECT_PATH=$PWD
 
 docker run -ti \
-    -v ${REPO_PATH}:/example \
+    -v ${PROJECT_PATH}:/project \
     -v $FLUTTER_INSTALL_CACHE_PATH:/flutter-installs \
     jasonrai/flutter-docker-deps:latest \
-    /bin/sh -c "./example/docker-flutter-install-then-test.sh"
+    /bin/sh -c "./project/docker-flutter-install-then-test.sh"
