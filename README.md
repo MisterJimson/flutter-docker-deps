@@ -23,10 +23,12 @@ This script runs the docker image, mounting 2 directories from the host OS onto 
 `PROJECT_PATH` is the path to your flutter project. If you keep this script in the root of your Flutter project, you can keep `PROJECT_PATH=$PWD` to set the path for you.
 
 `$FLUTTER_INSTALL_CACHE_PATH` is a bash environment variable. You need to set it to where you want to cache Flutter installs on the host machine.
+
+You may need to remove the `i` option from from the command if you are running in a non-interactive console This will be required on Jenkins for example.
 ### docker-flutter-install-then-test.sh
 ```
-VERSION="1.3.8"
-CHANNEL="beta"
+VERSION="1.5.4-hotfix.2"
+CHANNEL="stable"
 
 cd /flutter-installs
 
